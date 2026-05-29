@@ -1,46 +1,40 @@
 ---
-# Project metadata
 project:
-  title:        "UART — TinyTapeout GF180"
-  author:       "Soumya Challagi"
-  discord:      ""           # optional, your Discord username
-  description:  "8-bit UART transmitter and receiver. TX on uo_out[0], RX on ui_in[0], baud = clk/16."
-  language:     "Verilog"
-  clock_hz:     0            # 0 = use TT default clock
-
-  # Die size — 1×1 tile as required
+  title: "UART"
+  author: "Soumya Challagi"
+  discord: ""
+  description: "8-bit UART transmitter and receiver for TinyTapeout"
+  language: "Verilog"
+  clock_hz: 0
   tiles: "1x1"
-
-  # Top module name — MUST match your Verilog module name exactly
-  top_module: "tt_um_uart"
-
-  # Source files inside the src/ folder
+  top_module: "tt_um_example"
   source_files:
     - "project.v"
 
-  # Pin descriptions (shown on TT website)
-  pinout:
-    ui[0]: "rx — serial data in"
-    ui[1]: "tx_start — pulse HIGH to send byte in uio_in"
-    ui[2]: ""
-    ui[3]: ""
-    ui[4]: ""
-    ui[5]: ""
-    ui[6]: ""
-    ui[7]: ""
-    uo[0]: "tx — serial data out"
-    uo[1]: "tx_busy — HIGH while transmitting"
-    uo[2]: "rx_valid — pulses HIGH 1 clk when byte received"
-    uo[3]: "rx_data[0]"
-    uo[4]: "rx_data[1]"
-    uo[5]: "rx_data[2]"
-    uo[6]: "rx_data[3]"
-    uo[7]: "rx_data[4]"
-    uio[0]: "rx_data[0] (full byte out)"
-    uio[1]: "rx_data[1]"
-    uio[2]: "rx_data[2]"
-    uio[3]: "rx_data[3]"
-    uio[4]: "rx_data[4]"
-    uio[5]: "rx_data[5]"
-    uio[6]: "rx_data[6]"
-    uio[7]: "rx_data[7]"
+pinout:
+  ui[0]: "tx_data[0]"
+  ui[1]: "tx_data[1]"
+  ui[2]: "tx_data[2]"
+  ui[3]: "tx_data[3]"
+  ui[4]: "tx_data[4]"
+  ui[5]: "tx_data[5]"
+  ui[6]: "tx_data[6]"
+  ui[7]: "tx_data[7]"
+
+  uo[0]: "rx_data[0]"
+  uo[1]: "rx_data[1]"
+  uo[2]: "rx_data[2]"
+  uo[3]: "rx_data[3]"
+  uo[4]: "rx_data[4]"
+  uo[5]: "rx_data[5]"
+  uo[6]: "rx_data[6]"
+  uo[7]: "rx_data[7]"
+
+  uio[0]: "uart_rx input"
+  uio[1]: "tx_start input"
+  uio[2]: "uart_tx output"
+  uio[3]: "tx_busy output"
+  uio[4]: "tx_done output"
+  uio[5]: "rx_valid output"
+  uio[6]: "rx_busy output"
+  uio[7]: "frame_error output"
