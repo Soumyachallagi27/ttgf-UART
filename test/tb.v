@@ -1,85 +1,32 @@
-`timescale 1ns/1ps
+`default_nettype none
 
-// ============================================================
-// TESTBENCH FOR 4-BIT UART TRANSMITTER
-// ============================================================
+module tb;
 
-module uart4_tx_tb;
-
-    // ========================================================
-    // Testbench Signals
-    // ========================================================
+    reg  [7:0] ui_in;
+    wire [7:0] uo_out;
+    reg  [7:0] uio_in;
+    wire [7:0] uio_out;
+    wire [7:0] uio_oe;
+    reg        ena;
     reg        clk;
     reg        rst_n;
-    reg        tx_start;
-    reg [3:0]  tx_data;
 
-    wire       tx;
-    wire       tx_busy;
-
-    // ========================================================
-    // DUT INSTANTIATION
-    // ========================================================
-    uart4_tx uut (
-
+    tt_um_example dut (
+        .ui_in(ui_in),
+        .uo_out(uo_out),
+        .uio_in(uio_in),
+        .uio_out(uio_out),
+        .uio_oe(uio_oe),
+        .ena(ena),
         .clk(clk),
-        .rst_n(rst_n),
-        .tx_start(tx_start),
-        .tx_data(tx_data),
-
-        .tx(tx),
-        .tx_busy(tx_busy)
-
+        .rst_n(rst_n)
     );
 
-    // ========================================================
-    // CLOCK GENERATION
-    // ========================================================
-    initial
-    begin
-        clk = 0;
-
-        forever #5 clk = ~clk;
-    end
-
-    // ========================================================
-    // TEST SEQUENCE
-    // ========================================================
-    initial
-    begin
-
-        // Initial values
-        rst_n    = 0;
-        tx_start = 0;
-        tx_data  = 4'b1010;
-
-        // Apply reset
-        #20;
-        rst_n = 1;
-
-        // Start transmission
-        #20;
-        tx_start = 1;
-
-        #10;
-        tx_start = 0;
-
-        // Wait for transmission
-        #1000;
-
-        $finish;
-
-    end
-
-    // ========================================================
-    // WAVEFORM DUMP
-    // ========================================================
-    initial
-    begin
-
-        $dumpfile("uart4_tx.vcd");
-        $dumpvars(0, uart4_tx_tb);
-
+    initial begin
+        $dumpfile("tb.vcd");
+        $dumpvars(0, tb);
     end
 
 endmodule
+
+`default_nettype wire
